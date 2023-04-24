@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { IoMoon, IoMoonOutline } from 'react-icons/io5';
 import { shallow } from 'zustand/shallow';
-import { useTheme } from '../store';
+import { useStore } from '../store';
 
 const TheHeader = () => {
-    const [theme, toggleTheme] = useTheme((state) => [state.theme, state.toggleTheme], shallow);
+    const [theme, toggleTheme] = useStore((state) => [state.theme, state.toggleTheme], shallow);
 
     useEffect(() => {
         document.body.setAttribute('data-theme', theme);

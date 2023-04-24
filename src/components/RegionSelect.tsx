@@ -1,7 +1,7 @@
 import { shallow } from 'zustand/shallow';
 import { CustomSelect } from './CustomSelect';
 import { Region } from '../types';
-import { useRegion } from '../store';
+import { useStore } from '../store';
 
 type RegionOption = {
     [RegKey in Region]: { value: RegKey; label: RegKey };
@@ -17,7 +17,7 @@ const optionsMap: RegionOption = {
 const options = Object.values(optionsMap);
 
 const RegionSelect = () => {
-    const [region, setRegion] = useRegion((state) => [state.region, state.setRegion], shallow);
+    const [region, setRegion] = useStore((state) => [state.region, state.setRegion], shallow);
 
     return (
         <CustomSelect

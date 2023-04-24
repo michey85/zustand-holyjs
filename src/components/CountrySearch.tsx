@@ -1,9 +1,9 @@
 import { shallow } from 'zustand/shallow';
 import { Search } from './Search';
-import { useSearch } from '../store';
+import { useStore } from '../store';
 
 const CountrySearch = () => {
-    const [search, setSearch] = useSearch((state) => [state.search, state.setRegion], shallow);
+    const [search, setSearch] = useStore((state) => [state.search, state.setSearch], shallow);
 
     return <Search search={search} setSearch={setSearch} />;
 };
