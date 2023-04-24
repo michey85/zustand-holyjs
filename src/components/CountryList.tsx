@@ -1,10 +1,22 @@
+import { useEffect } from 'react';
+import { shallow } from 'zustand/shallow';
 import countries from '../../data/countries.json';
 import { Country } from '../types';
 import { prepareCountry } from '../utils/prepare-country';
 import { Card } from './Card';
+import { useCountries, useRegion, useSearch } from '../store';
+import { filterCountries } from '../utils/filter-country';
 
 const CountryList = () => {
-    const currentCountries = countries as unknown as Country[];
+    const search = useSearch((state) => state.search);
+    const region = useRegion((state) => state.region);
+
+    const [allCountries, setCountries] = useCountries((state) => [state.allCountries, state.setCountries], shallow);
+    const currentCountries = filterCountries(allCountries, search, region);
+
+    useEffect(() => {
+        setCountries(countries as unknown as Country[]);
+    }, [setCountries]);
 
     return (
         <div className="countries">

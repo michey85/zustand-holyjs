@@ -1,5 +1,7 @@
+import { shallow } from 'zustand/shallow';
 import { CustomSelect } from './CustomSelect';
 import { Region } from '../types';
+import { useRegion } from '../store';
 
 type RegionOption = {
     [RegKey in Region]: { value: RegKey; label: RegKey };
@@ -15,7 +17,7 @@ const optionsMap: RegionOption = {
 const options = Object.values(optionsMap);
 
 const RegionSelect = () => {
-    const region = null;
+    const [region, setRegion] = useRegion((state) => [state.region, state.setRegion], shallow);
 
     return (
         <CustomSelect
@@ -24,6 +26,7 @@ const RegionSelect = () => {
             isClearable
             isSearchable={false}
             value={region ? optionsMap[region] : null}
+            onChange={(selected) => setRegion(selected ? selected.value : null)}
         />
     );
 };
