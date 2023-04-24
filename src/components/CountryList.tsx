@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { shallow } from 'zustand/shallow';
+// import { shallow } from 'zustand/shallow';
 
 import { prepareCountry } from '../utils/prepare-country';
 import { useCountries, useRegion, useSearch } from '../store';
@@ -10,10 +10,13 @@ const CountryList = () => {
     const search = useSearch((state) => state.search);
     const region = useRegion((state) => state.region);
 
-    const [allCountries, status, loadCountries] = useCountries(
-        (state) => [state.allCountries, state.status, state.loadCountries],
-        shallow,
-    );
+    const allCountries = useCountries.use.allCountries();
+    const status = useCountries.use.status();
+    const loadCountries = useCountries.use.loadCountries();
+    // const [allCountries, status, loadCountries] = useCountries(
+    //     (state) => [state.allCountries, state.status, state.loadCountries],
+    //     shallow,
+    // );
     const currentCountries = filterCountries(allCountries, search, region);
 
     useEffect(() => {
