@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Typography */
+  --family: 'Nunito Sans', sans-serif;
+  --fs-sm: 14px;
+  --fs-md: 16px;
+  --fw-light: 300;
+  --fw-normal: 600;
+  --fw-bold: 800;
+
+  /* Other */
+  --radii: 0.5rem;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body[data-theme='dark'] {
+  --colors-text: hsl(0, 0%, 100%);
+  --colors-bg: hsl(207, 26%, 17%);
+  --colors-ui-base: hsl(209, 23%, 22%);
+
+  --shadow: rgba(245, 245, 245, 0.2) 0 0 8px;
+}
+body[data-theme='light'] {
+  --colors-text: hsl(200, 15%, 8%);
+  --colors-bg: hsl(0, 0%, 98%);
+  --colors-ui-base: hsl(0, 0%, 100%);
+
+  --shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+body {
+  margin: 0;
+  font-family: var(--family);
+  color: var(--colors-text);
+  font-weight: var(--fw-light);
+  background-color: var(--colors-bg);
+}
+
+button {
+  padding: 0 1rem;
+  background-color: var(--colors-ui-base);
+  box-shadow: var(--shadow);
+  line-height: 2.5;
+  border-radius: var(--radii);
+
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+label {
+  background-color: var(--colors-ui-base);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+
+  border-radius: var(--radii);
+  box-shadow: var(--shadow);
+  width: 100%;
+  margin-bottom: 1rem;
+
+  @media (min-width: 767px) {
+    margin-bottom: 0;
+    width: 280px;
+  }
+}
+
+input[type="search"] {
+  margin-left: 2rem;
+  border: none;
+  outline: none;
+  color: var(--color-text);
+  background-color: var(--colors-ui-base);
+}
+
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+main {
+  padding: 2rem 0;
+
+  @media (min-width: 767px) {
+    padding: 4rem 0;
+  }
+}
+
+header {
+  box-shadow: var(--shadow);
+  background-color: var(--colors-ui-base);
+
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 0;
+  }
+
+  .title {
+    color: var(--colors-text);
+    font-size: var(--fs-sm);
+    text-decoration: none;
+    font-weight: var(--fw-bold);
+  }
+
+  .switcher {
+    color: var(--colors-text);
+    font-size: var(--fs-sm);
+    cursor: pointer;
+    text-transform: capitalize;
+
+    span {
+      margin-left: 0.75rem;
+    }
+  }
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  @media (min-width: 767px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.react-select-container {
+  width: 200px;
+  border-radius: var(--radii);
+  font-family: var(--family);
+  border: none;
+
+  & > * {
+    box-shadow: var(--shadow);
+  }
+
+  & input {
+    padding-left: 0.25rem;
+  }
+
+  & * {
+    color: var(--colors-text) !important;
+  }
+
+  & > div[id] {
+    background-color: var(--colors-ui-base);
+  }
+}
+
+.countries {
+  width: 100%;
+  padding: 2rem 0;
+
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+
+  @media (min-width: 767px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+
+    padding: 2.5rem 0;
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4rem;
+  }
+}
+
+.card {
+  border-radius: var(--radii);
+  background-color: car(--colors-ui-base);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  overflow: hidden;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    object-position: center;
+    box-shadow: var(--shadow);
+  }
+
+  &-body {
+    padding: 1rem 1.5rem 2rem;
+  }
+
+  &-title {
+    margin: 0;
+    font-size: var(--fs-md);
+    font-weight: var(--fw-bold);
+  }
+
+  &-info {
+    list-style: none;
+    margin: 0;
+    padding: 1rem 0 0;
+  }
+
+  &-info-item {
+    font-size: var(--fs-sm);
+    line-height: 1.5;
+    font-weight: var(--fw-light);
+
+    & > b {
+      font-weight: var(--fw-bold);
+    }
+  }
+}
