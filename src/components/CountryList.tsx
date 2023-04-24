@@ -1,22 +1,32 @@
 import { useEffect } from 'react';
 import { shallow } from 'zustand/shallow';
-import countries from '../../data/countries.json';
-import { Country } from '../types';
+
 import { prepareCountry } from '../utils/prepare-country';
-import { Card } from './Card';
 import { useCountries, useRegion, useSearch } from '../store';
 import { filterCountries } from '../utils/filter-country';
+import { Card } from './Card';
 
 const CountryList = () => {
     const search = useSearch((state) => state.search);
     const region = useRegion((state) => state.region);
 
-    const [allCountries, setCountries] = useCountries((state) => [state.allCountries, state.setCountries], shallow);
+    const [allCountries, status, loadCountries] = useCountries(
+        (state) => [state.allCountries, state.status, state.loadCountries],
+        shallow,
+    );
     const currentCountries = filterCountries(allCountries, search, region);
 
     useEffect(() => {
-        setCountries(countries as unknown as Country[]);
-    }, [setCountries]);
+        loadCountries();
+    }, [loadCountries]);
+
+    if (status === 'loading') {
+        return (
+            <div className="countries">
+                <h2>Loading...</h2>
+            </div>
+        );
+    }
 
     return (
         <div className="countries">

@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { Country, Region } from './types';
+import { fetchCountries } from './services/countries';
 
 type ThemeSlice = {
     theme: 'light' | 'dark';
@@ -32,11 +33,23 @@ export const useRegion = create<RegionSlice>((set) => ({
 }));
 
 type CountiesSlice = {
+    status: 'idle' | 'loading';
     allCountries: Country[];
+    loadCountries: () => void;
     setCountries: (val: Country[]) => void;
 };
 
-export const useCountries = create<CountiesSlice>((set) => ({
+export const useCountries = create<CountiesSlice>((set, get) => ({
+    status: 'idle',
     allCountries: [],
     setCountries: (val) => set({ allCountries: val }),
+    loadCountries: async () => {
+        const isEmpty = get().allCountries.length === 0;
+
+        if (isEmpty) {
+            set({ status: 'loading' });
+
+            await fetchCountries((countries) => set({ allCountries: countries, status: 'idle' }));
+        }
+    },
 }));
